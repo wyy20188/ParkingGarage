@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@*@model IEnumerable<MVC5.Models.User>*@
+@model PagedList.IPagedList<MVC5.Models.User>
+@using PagedList.Mvc;
+
+    <p class="sub-header">@Html.ActionLink("CreateNewUser", "Create")</p>
+    @using (Html.BeginForm("Index", "UserTest", FormMethod.Get))
+    {
+        <p>
+            Find by name:@Html.TextBox("searchString", ViewBag.CurrentFilter as string)
+            <input type="submit" value="Search" class="btn btn-primary" />
+        </p>
+    }
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>@Html.ActionLink("UserName", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })</th>
+                    <th>EmailAddress</th>
+                    <th>RegisterDate</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.UserName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.EmailAddress)</td>
+                        <td>@Html.DisplayFor(modelItem => item.RegisterDate)</td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = item.ID }))
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }))
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID }))
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br />
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+

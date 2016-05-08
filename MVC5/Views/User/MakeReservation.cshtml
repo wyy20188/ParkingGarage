@@ -1,0 +1,176 @@
+﻿@model MVC5.Models.User
+
+@{
+    int ID = Convert.ToInt32(Session["UserID"]);
+    ViewBag.Title = "Reserve";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/dashboard.css")
+@Styles.Render("~/Content/userstyle.css")
+@Styles.Render("~/Content/bootstrap-datetimepicker.min.css")
+
+
+<div class="container">
+    <div class="col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+            <li>@Html.ActionLink("OverView", "Index", new { id = @ID })</li>
+            <li>@Html.ActionLink("Account Information", "AccountInformation", new { id = @ID })</li>
+            <li>@Html.ActionLink("Reservation Information", "ReservationInformation", new { id = @ID })</li>
+            <li>@Html.ActionLink("Payments Information", "Payments", new { id = @ID })</li>
+        </ul>
+        <ul class="nav nav-sidebar">
+            <li>@Html.ActionLink("Edit Account", "EditAccount", new { id = @ID })</li>
+            <li>@Html.ActionLink("Make Reservation", "MakeReservation", new { id = @ID })</li>
+            <li>@Html.ActionLink("Edit Reservation", "EditReservation", new { id = @ID })</li>
+            <li>@Html.ActionLink("Cancel Reservation", "CancelReservation", new { id = @ID })</li>
+            <li><a href="">Exit System</a></li>
+            <li><a href="">More navigation</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="col-md-12 col-md-offset-1 main" style="margin-top:80px">
+
+    <div class="container">
+        <h2>Reserve!</h2>
+        <hr />
+
+        <div class="row">
+            <div class="col-md-9 col-md-offset-1">
+
+                <div class="panel panel-green">
+
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <span class="glyphicon glyphicon-usd" style="font-size:40px"></span>
+                            </div>
+                            <div class="col-xs-10 text-right">
+                                <span style="font-size:30px">12</span>
+                                <div>预计消费</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="row">
+                        <div class="col-xs-2 col-xs-offset-2">
+                            <label>预约车牌号码</label>
+                        </div>
+                        <div class="col-xs-6">
+                            <form role="form">
+                                <div class="form-group">
+                                    <select class="form-control">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-2 col-xs-offset-2">
+                            <label>预约开始时间</label>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <div class='input-group date' id='datetimepicker1'>
+                                    <input type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            $(function () {
+                                $('#datetimepicker1').datetimepicker(
+                                    {
+                                        sideBySide: true,
+                                        showTodayButton: true,
+                                        format: 'YYYY-M-D H:mm'
+                                    }
+                                    );
+                            });
+                        </script>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-2 col-xs-offset-2">
+                            <label>预约结束时间</label>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <div class='input-group date' id='datetimepicker2'>
+                                    <input type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            $(function () {
+                                $('#datetimepicker2').datetimepicker(
+                                    {
+                                        sideBySide: true,
+                                        showTodayButton: true,
+                                        format: 'YYYY-M-D H:mm'
+                                    }
+                                    );
+                            });
+                        </script>
+                    </div>
+                    <hr />
+                    <div class="panel-footer">
+                        <span class="pull-right" style="margin-right:400px">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" style="font-size:15px">提交</button>
+                        </span>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 class="modal-title">Modal title</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>One fine body…</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+
+                    <!-- modal居中 -->
+                    <script type="text/javascript">
+                        function centerModals() {
+                            $('#myModal').each(function (i) {
+                                var $clone = $(this).clone().css('display', 'block').appendTo('body'); var top = Math.round(($clone.height() - $clone.find('.modal-content').height()) / 2);
+                                top = top > 0 ? top : 0;
+                                $clone.remove();
+                                $(this).find('.modal-content').css("margin-top", top);
+                            });
+                        }
+                        $('#myModal').on('show.bs.modal', centerModals);
+                        $(window).on('resize', centerModals);
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/Scripts/moment.min.js")
+@Scripts.Render("~/Scripts/bootstrap-datetimepicker.min.js")
+

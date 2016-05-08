@@ -1,0 +1,95 @@
+﻿@model MVC5.ViewModels.EditAccountViewModel
+
+@{
+    int ID = Convert.ToInt32(Session["UserID"]);
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/dashboard.css")
+@Styles.Render("~/Content/userstyle.css")
+
+<div class="container">
+    <div class="col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+            <li>@Html.ActionLink("OverView", "Index", new { id = @ID })</li>
+            <li>@Html.ActionLink("Account Information", "AccountInformation", new { id = @ID })</li>
+            <li>@Html.ActionLink("Reservation Information", "ReservationInformation", new { id = @ID })</li>
+            <li>@Html.ActionLink("Payments Information", "Payments", new { id = @ID })</li>
+        </ul>
+        <ul class="nav nav-sidebar">
+            <li>@Html.ActionLink("Edit Account", "EditAccount", new { id = @ID })</li>
+            <li>@Html.ActionLink("Make Reservation", "MakeReservation", new { id = @ID })</li>    
+            <li>@Html.ActionLink("Edit Reservation", "EditReservation", new { id = @ID })</li>
+            <li>@Html.ActionLink("Cancel Reservation", "CancelReservation", new { id = @ID })</li>
+            <li><a href="">Exit System</a></li>
+            <li><a href="">More navigation</a></li>
+        </ul>
+    </div>
+</div>
+<div class="col-md-10 col-md-offset-2 main" style="margin-top:95px">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h2>Edit Account</h2>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CreditCard, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CreditCard, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CreditCard, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.OldPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.OldPassword, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.OldPassword, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NewPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NewPassword, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NewPassword, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-4">
+                    <input type="submit" value="SaveChange" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    }
+</div>

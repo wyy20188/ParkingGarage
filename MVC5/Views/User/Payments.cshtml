@@ -1,0 +1,53 @@
+﻿@model MVC5.Models.User
+
+@{
+    int ID = Convert.ToInt32(Session["UserID"]);
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/dashboard.css")
+@Styles.Render("~/Content/userstyle.css")
+
+<div class="container">
+    <div class="col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+            <li>@Html.ActionLink("OverView", "Index", new { id = @ID })</li>
+            <li>@Html.ActionLink("Account Information", "AccountInformation", new { id = @ID })</li>
+            <li>@Html.ActionLink("Reservation Information", "ReservationInformation", new { id = @ID })</li>
+            <li>@Html.ActionLink("Payments Information", "Payments", new { id = @ID })</li>
+        </ul>
+        <ul class="nav nav-sidebar">
+            <li>@Html.ActionLink("Edit Account", "EditAccount", new { id = @ID })</li>
+            <li>@Html.ActionLink("Make Reservation", "MakeReservation", new { id = @ID })</li>    
+            <li>@Html.ActionLink("Edit Reservation", "EditReservation", new { id = @ID })</li>
+            <li>@Html.ActionLink("Cancel Reservation", "CancelReservation", new { id = @ID })</li>
+            <li><a href="">Exit System</a></li>
+            <li><a href="">More navigation</a></li>
+        </ul>
+    </div>
+
+    <div class="col-md-12 col-md-offset-1 main" style="margin-top:80px">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="jumbotron">
+                        <h2 class="page-header">区域一</h2>
+                        <p>Bootstrap has a few easy ways to quickly get started, each one appealing to a different skill level and use case. Read through to see what suits your particular needs.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="jumbotron">
+                        <h2 class="page-header">区域二</h2>
+                        <p>If you work with Bootstrap's uncompiled source code, you need to compile the LESS files to produce usable CSS files. For compiling LESS files into CSS, we only officially support Recess</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="jumbotron ">
+                        <h2 class="page-header">区域三</h2>
+                        <p>Within the download you'll find the following directories and files, logically grouping common resources and providing both compiled and minified variations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

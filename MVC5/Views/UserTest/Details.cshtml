@@ -1,0 +1,34 @@
+﻿@model MVC5.Models.User
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <dl>
+        <dt>@Html.DisplayNameFor(model => model.UserName)</dt>
+        <dd>@Html.DisplayFor(model => model.UserName)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.EmailAddress)</dt>
+        <dd>@Html.DisplayFor(model => model.EmailAddress)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.UserRoles)</dt>
+        <dd>
+            <table>
+                <tr>
+                    <th>RoleName</th>
+                </tr>
+                @foreach (var item in Model.UserRoles)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Role.RoleName)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+    </dl>
+</div>

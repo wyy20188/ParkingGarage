@@ -1,0 +1,16 @@
+﻿@if (Convert.ToInt32(Session["UserID"]) > 0)
+{   
+    <li>@Html.ActionLink("Personal Center", "Index","User",new { id = @Convert.ToInt32(Session["UserID"]) }, htmlAttributes: new { id = "UserIndexLink" })</li>
+    using (Html.BeginForm("SignOut", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+    <ul class="nav navbar-nav navbar-right" style="margin-right:10px">
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Sign Out</a></li>
+    </ul>
+    }
+}
+else
+{
+     <li>@Html.ActionLink("Sign Up", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+     <li>@Html.ActionLink("Sign In", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+}

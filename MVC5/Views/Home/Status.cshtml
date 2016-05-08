@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Status";
+}
+<div style="margin-top:80px">
+    <div class="container">
+
+        <button type="button" id="myButton" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">
+            Loading state
+        </button>
+        <script>
+            $('#myButton').on('click', function () {
+                var $btn = $(this).button('loading')
+                // business logic...
+                $btn.button('reset')
+            })
+        </script>
+        <h1>Hello, world!</h1>
+        @for (int i = 0; i < 15; i++)
+        {
+            for (int j = 0; j < 14; j++)
+            {
+
+                <button type="button" class="btn btn-primary" title="Popover title"
+                        data-container="body" data-toggle="popover">
+                    车位
+                </button>
+                <span>&nbsp;</span>               
+            }
+            <hr/>
+        }
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('[data-toggle="popover"]').each(function () {
+            var element = $(this);
+            var id = element.attr('id');
+            var txt = element.html();
+            element.popover({
+                trigger: 'click',
+                placement: 'bottom', //top, bottom, left or right
+                title: txt,
+                html: 'true',
+                content: ContentMethod(txt),
+            }).on("mouseenter", function () {
+                var _this = this;
+                $(this).popover("show");
+                $(this).siblings(".popover").on("mouseleave", function () {
+                    $(_this).popover('hide');
+                });
+            }).on("mouseleave", function () {
+                var _this = this;
+                setTimeout(function () {
+                    if (!$(".popover:hover").length) {
+                        $(_this).popover("hide")
+                    }
+                }, 10);
+            });
+        });
+    });
+    function ContentMethod(txt) {
+        return '<table class="table table-bordered"><tr><td>' + txt + '</td><td>BB</td><td>CC</td><td>DD</td></tr>' +
+            '<tr><td>' + txt + '</td><td>BB</td><td>CC</td><td>DD</td></tr>' +
+            '<tr><td>' + txt + '</td><td>BB</td><td>CC</td><td>DD</td></tr>' +
+            '<tr><td>A</td><td>BB</td>  <td>CC</td><td>DD</td></tr></table>';
+    }
+</script>

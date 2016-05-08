@@ -1,0 +1,51 @@
+﻿@model MVC5.Models.User
+
+@{
+    int ID = Convert.ToInt32(Session["UserID"]);
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/dashboard.css")
+@Styles.Render("~/Content/userstyle.css")
+
+<div class="container">
+    <div class="col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+            <li>@Html.ActionLink("OverView", "Index", new { id = @ID })</li>
+            <li>@Html.ActionLink("Account Information", "AccountInformation", new { id = @ID })</li>
+            <li>@Html.ActionLink("Reservation Information", "ReservationInformation", new { id = @ID })</li>
+            <li>@Html.ActionLink("Payments Information", "Payments", new { id = @ID })</li>
+        </ul>
+        <ul class="nav nav-sidebar">
+            <li>@Html.ActionLink("Edit Account", "EditAccount", new { id = @ID })</li>
+            <li>@Html.ActionLink("Make Reservation", "MakeReservation", new { id = @ID })</li>    
+            <li>@Html.ActionLink("Edit Reservation", "EditReservation", new { id = @ID })</li>
+            <li>@Html.ActionLink("Cancel Reservation", "CancelReservation", new { id = @ID })</li>
+            <li><a href="">Exit System</a></li>
+            <li><a href="">More navigation</a></li>
+        </ul>
+
+    </div>
+    <div class="col-md-10 col-md-offset-2 main" style="margin-top:95px">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading" style="text-align: center">
+                Account Information
+            </div>
+            <table class="table table-striped">
+                @foreach (System.Reflection.PropertyInfo p in Model.GetType().GetProperties())
+                {
+                    <tr>
+                        <th>@p.Name</th>
+                        <td id="content">@p.GetValue(Model)</td>
+                    </tr>
+                }
+            </table>
+            <div class="panel-footer">
+                <span class="pull-left" style="margin-left:300px"><button type="button" class="btn btn-primary">修改</button></span>
+                <span class="pull-right" style="margin-right:300px"><button type="button" class="btn btn-success">提交</button></span>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
